@@ -19,7 +19,9 @@ const Banner = () => {
               href="/packages"
               className="relative inline-flex items-center justify-center md:justify-start overflow-hidden font-medium transition-all"
             >
-              <button className="mx-3 my-2 bg-">Get Started Now</button>
+              <button className="px-3 py-2 rounded-2xl text-white bg-[#2e0068] hover:bg-[#4a2b70]">
+                Get Started Now
+              </button>
             </Link>
           </div>
         </div>
