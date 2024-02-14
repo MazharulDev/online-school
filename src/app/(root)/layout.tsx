@@ -37,7 +37,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Layout>
       <Navbar />
-      {children}
+      <div className="bg-white">{children}</div>
       <Footer />
     </Layout>
   );
