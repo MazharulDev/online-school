@@ -12,10 +12,10 @@ import Link from "next/link";
 import { useCreateUserMutation } from "@/redux/api/authApi";
 
 type FormValues = {
+  mobile_number: string;
   name: string;
-  email: string;
-  phoneNumber: string;
   password: string;
+  password2: string;
 };
 
 const SignUp = () => {
@@ -24,11 +24,11 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       const res = await createUser({ ...data }).unwrap();
-      console.log(res);
-      // if (res?._id) {
-      //   router.push("/login");
-      //   message.success("Account Created successfully, Please login");
-      // }
+      if (res?.token?.access) {
+        router.push("/");
+        message.success("Account Created successfully, Please login");
+      }
+      storeUserInfo({ accessToken: res?.token?.access });
     } catch (error) {
       console.error(error);
     }
@@ -95,7 +95,7 @@ const SignUp = () => {
                 type="password"
                 placeholder="********"
                 size="large"
-                label="Secend Password"
+                label="Retype Password"
               />
             </div>
             <Button className="bg-blue-500" type="primary" htmlType="submit">

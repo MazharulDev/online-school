@@ -4,7 +4,7 @@ import { getUserInfo } from "@/services/auth.service";
 import { useState } from "react";
 
 const Navbar = () => {
-  const { userId } = getUserInfo() as any;
+  const { token_type } = getUserInfo() as any;
   const [open, setOpen] = useState(false);
   return (
     <header className="bg-white fixed top-0 left-0 right-0 z-[10] backdrop-filter backdrop-blur-md bg-opacity-80">
@@ -44,7 +44,7 @@ const Navbar = () => {
                     Academic Program
                   </Link>
                 </li>
-                {userId ? (
+                {token_type ? (
                   <li>
                     <Link
                       className="text-gray-500 transition hover:text-gray-500/75"
@@ -132,7 +132,7 @@ const Navbar = () => {
             >
               Academic Program
             </Link>
-            {userId ? (
+            {token_type ? (
               <Link
                 className="text-gray-500 transition hover:text-gray-500/75"
                 href="/profile"

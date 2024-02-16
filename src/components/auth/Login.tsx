@@ -12,7 +12,7 @@ import Form from "../forms/Form";
 import Link from "next/link";
 
 type FormValues = {
-  email: string;
+  mobile_number: string;
   password: string;
 };
 
@@ -20,16 +20,15 @@ const LoginPage = () => {
   const router = useRouter();
   const [loginUser] = useUserLoginMutation();
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    console.log(data);
     try {
-      // const res = await loginUser({ ...data }).unwrap();
-      // if (res?.accessToken) {
-      //   router.push("/");
-      //   message.success("User logged in successfully");
-      // } else {
-      //   message.error("Rechack your email and password");
-      // }
-      // storeUserInfo({ accessToken: res?.accessToken });
+      const res = await loginUser({ ...data }).unwrap();
+      if (res?.token?.access) {
+        router.push("/");
+        message.success("User logged in successfully");
+      } else {
+        message.error("Rechack your email and password");
+      }
+      storeUserInfo({ accessToken: res?.token?.access });
     } catch (error) {
       console.error(error);
     }
@@ -52,11 +51,11 @@ const LoginPage = () => {
           <Form submitHandler={onSubmit}>
             <div>
               <FormInput
-                name="email"
-                placeholder="example@email.com"
+                name="mobile_number"
+                placeholder="Phone number"
                 type="text"
                 size="large"
-                label="Email"
+                label="Phone Number"
               />
             </div>
             <div
