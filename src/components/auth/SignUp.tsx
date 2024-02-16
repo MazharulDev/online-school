@@ -1,35 +1,34 @@
 "use client";
 import { Button, Col, Row, message } from "antd";
-import loginImage from "@/assets/Login.png";
+import signupImage from "../../assets/signup.png";
 import Image from "next/image";
 
 import FormInput from "@/components/forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
-import { useUserLoginMutation } from "@/redux/api/authApi";
 import { storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import Form from "../forms/Form";
 import Link from "next/link";
+import { useCreateUserMutation } from "@/redux/api/authApi";
 
 type FormValues = {
+  name: string;
   email: string;
+  phoneNumber: string;
   password: string;
 };
 
-const LoginPage = () => {
+const SignUp = () => {
   const router = useRouter();
-  const [loginUser] = useUserLoginMutation();
+  const [createUser] = useCreateUserMutation();
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    console.log(data);
     try {
-      // const res = await loginUser({ ...data }).unwrap();
-      // if (res?.accessToken) {
-      //   router.push("/");
-      //   message.success("User logged in successfully");
-      // } else {
-      //   message.error("Rechack your email and password");
+      const res = await createUser({ ...data }).unwrap();
+      console.log(res);
+      // if (res?._id) {
+      //   router.push("/login");
+      //   message.success("Account Created successfully, Please login");
       // }
-      // storeUserInfo({ accessToken: res?.accessToken });
     } catch (error) {
       console.error(error);
     }
@@ -43,22 +42,36 @@ const LoginPage = () => {
       }}
     >
       <Col sm={12} md={10} lg={10}>
-        <Image src={loginImage} width={380} alt="login image" />
+        <Image src={signupImage} width={500} alt="login image" />
       </Col>
 
       <Col sm={12} md={8} lg={10} style={{ padding: "0 15px" }}>
-        <h1 className="text-4xl font-bold mb-4">Login</h1>
+        <h1 className="text-4xl font-bold mb-4">Create your account</h1>
         <div>
           <Form submitHandler={onSubmit}>
             <div>
               <FormInput
-                name="email"
-                placeholder="example@email.com"
+                name="mobile_number"
+                placeholder="Phone number"
                 type="text"
                 size="large"
-                label="Email"
+                label="Enter Phone Number"
               />
             </div>
+            <div
+              style={{
+                margin: "15px 0px",
+              }}
+            >
+              <FormInput
+                name="name"
+                type="text"
+                placeholder="Full Name"
+                size="large"
+                label="Enter Name"
+              />
+            </div>
+
             <div
               style={{
                 margin: "15px 0px",
@@ -72,13 +85,26 @@ const LoginPage = () => {
                 label="Password"
               />
             </div>
+            <div
+              style={{
+                margin: "15px 0px",
+              }}
+            >
+              <FormInput
+                name="password2"
+                type="password"
+                placeholder="********"
+                size="large"
+                label="Secend Password"
+              />
+            </div>
             <Button className="bg-blue-500" type="primary" htmlType="submit">
-              Login
+              Signup
             </Button>
           </Form>
           <div style={{ marginTop: "10px" }}>
             <p>
-              You have not account? <Link href="/signup">Sign Up</Link>
+              Already have an account? <Link href="/login">Login</Link>
             </p>
           </div>
         </div>
@@ -87,4 +113,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUp;

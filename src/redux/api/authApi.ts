@@ -1,7 +1,7 @@
 import { tagTypes } from "../tagTypes/tag-types";
 import { baseApi } from "./baseApi";
 
-const AUTH_URL = "/auth";
+const AUTH_URL = "/user";
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     userLogin: build.mutation({
@@ -12,27 +12,15 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
-    userSignup: build.mutation({
+    createUser: build.mutation({
       query: (userData) => ({
-        url: `/all-users/create-user`,
+        url: `${AUTH_URL}/register`,
         method: "POST",
         data: userData,
       }),
       invalidatesTags: [tagTypes.user],
     }),
-    createAdmin: build.mutation({
-      query: (adminData) => ({
-        url: `/all-users/create-admin`,
-        method: "POST",
-        data: adminData,
-      }),
-      invalidatesTags: [tagTypes.admin],
-    }),
   }),
 });
 
-export const {
-  useUserLoginMutation,
-  useUserSignupMutation,
-  useCreateAdminMutation,
-} = authApi;
+export const { useUserLoginMutation, useCreateUserMutation } = authApi;
