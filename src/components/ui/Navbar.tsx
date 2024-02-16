@@ -1,11 +1,18 @@
 "use client";
 import Link from "next/link";
-import { getUserInfo } from "@/services/auth.service";
+import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { useState } from "react";
+import { authkey } from "@/constants/storageKey";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const { token_type } = getUserInfo() as any;
   const [open, setOpen] = useState(false);
+  const logOut = () => {
+    removeUserInfo(authkey);
+    router.push("/login");
+  };
   return (
     <header className="bg-white fixed top-0 left-0 right-0 z-[10] backdrop-filter backdrop-blur-md bg-opacity-80">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-0">
@@ -46,12 +53,20 @@ const Navbar = () => {
                 </li>
                 {token_type ? (
                   <li>
-                    <Link
-                      className="text-gray-500 transition hover:text-gray-500/75"
-                      href="/profile"
-                    >
-                      Dashboard
-                    </Link>
+                    <div className="flex justify-center items-center gap-4">
+                      <Link
+                        className="text-gray-500 transition hover:text-gray-500/75"
+                        href="/profile"
+                      >
+                        Dashboard
+                      </Link>
+                      <button
+                        onClick={logOut}
+                        className="text-red-500 hover:text-red-400"
+                      >
+                        Logout
+                      </button>
+                    </div>
                   </li>
                 ) : (
                   <li>
@@ -133,12 +148,20 @@ const Navbar = () => {
               Academic Program
             </Link>
             {token_type ? (
-              <Link
-                className="text-gray-500 transition hover:text-gray-500/75"
-                href="/profile"
-              >
-                Dashboard
-              </Link>
+              <div className="text-center flex flex-col gap-7 text-md">
+                <Link
+                  className="text-gray-500 transition hover:text-gray-500/75"
+                  href="/profile"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={logOut}
+                  className="text-red-500 hover:text-red-400"
+                >
+                  Logout
+                </button>
+              </div>
             ) : (
               <Link
                 className="text-gray-500 transition hover:text-gray-500/75"

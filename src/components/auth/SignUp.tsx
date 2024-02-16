@@ -10,10 +10,13 @@ import { useRouter } from "next/navigation";
 import Form from "../forms/Form";
 import Link from "next/link";
 import { useCreateUserMutation } from "@/redux/api/authApi";
+import FormSelectField from "../forms/FormSelectField";
+import { roleOptions } from "@/constants/global";
 
 type FormValues = {
   mobile_number: string;
   name: string;
+  email: string;
   password: string;
   password2: string;
 };
@@ -22,11 +25,23 @@ const SignUp = () => {
   const router = useRouter();
   const [createUser] = useCreateUserMutation();
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
+    if (data?.password !== data?.password2) {
+      return message.error("Two password did not match");
+    }
+
+    const studentData = {
+      mobile_number: data?.mobile_number,
+      name: data?.name,
+      email: data?.email,
+      role: "student",
+      password: data?.password,
+      password2: data?.password2,
+    };
     try {
-      const res = await createUser({ ...data }).unwrap();
+      const res = await createUser({ ...studentData }).unwrap();
       if (res?.token?.access) {
         router.push("/");
-        message.success("Account Created successfully, Please login");
+        message.success("Registration successfully");
       }
       storeUserInfo({ accessToken: res?.token?.access });
     } catch (error) {
@@ -46,18 +61,9 @@ const SignUp = () => {
       </Col>
 
       <Col sm={12} md={8} lg={10} style={{ padding: "0 15px" }}>
-        <h1 className="text-4xl font-bold mb-4">Create your account</h1>
+        <h1 className="text-4xl font-bold mb-4">Registration</h1>
         <div>
           <Form submitHandler={onSubmit}>
-            <div>
-              <FormInput
-                name="mobile_number"
-                placeholder="Phone number"
-                type="text"
-                size="large"
-                label="Enter Phone Number"
-              />
-            </div>
             <div
               style={{
                 margin: "15px 0px",
@@ -69,6 +75,28 @@ const SignUp = () => {
                 placeholder="Full Name"
                 size="large"
                 label="Enter Name"
+              />
+            </div>
+            <div
+              style={{
+                margin: "15px 0px",
+              }}
+            >
+              <FormInput
+                name="email"
+                type="email"
+                placeholder="Type email"
+                size="large"
+                label="Enter Email"
+              />
+            </div>
+            <div>
+              <FormInput
+                name="mobile_number"
+                placeholder="Phone number"
+                type="text"
+                size="large"
+                label="Enter Phone Number"
               />
             </div>
 

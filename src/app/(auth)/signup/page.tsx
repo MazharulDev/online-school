@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import SignUp from "@/components/auth/SignUp";
 
 export const metadata: Metadata = {
-  title: "OS|signup",
+  title: "OS|Registration",
 };
 
 const SignUpPage = () => {
