@@ -1,6 +1,7 @@
 "use client";
 import Form from "@/components/forms/Form";
 import FormInput from "@/components/forms/FormInput";
+import { useTeacherRequestMutation } from "@/redux/api/authApi";
 import { Button, Col, Row, message } from "antd";
 import { SubmitHandler } from "react-hook-form";
 
@@ -11,10 +12,13 @@ type FormValues = {
 };
 
 const TeacherRequest = () => {
+  const [teacherRequest] = useTeacherRequestMutation();
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    console.log(data);
     try {
-      //  const res = await createUser({ ...studentData }).unwrap();
+      const res = await teacherRequest({ ...data }).unwrap();
+      if (res?.id) {
+        message.success("Request sent successfully");
+      }
     } catch (error) {
       message.error("Someting went wrong");
     }

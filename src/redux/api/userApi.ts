@@ -11,7 +11,22 @@ export const userApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+    teacherList: build.query({
+      query: () => ({
+        url: `${USER_URL}/teachers/`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.teacher],
+    }),
+    acceptTeacher: build.query({
+      query: (id: number | null | undefined) => ({
+        url: `${USER_URL}/approve-teacher/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.teacher],
+    }),
   }),
 });
 
-export const { useUserQuery } = userApi;
+export const { useUserQuery, useTeacherListQuery, useAcceptTeacherQuery } =
+  userApi;

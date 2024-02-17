@@ -12,7 +12,7 @@ export const sidebarItems = (role: string) => {
   const studentSidebarItem: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}`}>Student</Link>,
+      label: <Link href={`/${role}/`}>Student</Link>,
       key: `${role}`,
       icon: <ProfileOutlined />,
     },
@@ -50,9 +50,9 @@ export const sidebarItems = (role: string) => {
       key: `/${role}`,
     },
     {
-      label: <Link href={`/${role}/user`}>Manage Student</Link>,
+      label: <Link href={`/${role}/teacher-request`}>Teacher Request</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/user`,
+      key: `/${role}/teacher-request`,
     },
   ];
 

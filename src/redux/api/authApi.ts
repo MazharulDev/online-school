@@ -20,7 +20,19 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    teacherRequest: build.mutation({
+      query: (userData) => ({
+        url: `${AUTH_URL}/teachers/`,
+        method: "POST",
+        data: userData,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
   }),
 });
 
-export const { useUserLoginMutation, useCreateUserMutation } = authApi;
+export const {
+  useUserLoginMutation,
+  useCreateUserMutation,
+  useTeacherRequestMutation,
+} = authApi;
