@@ -48,21 +48,21 @@ const ReviewSection = () => {
       client_name: "Alex Smith",
       img: "https://res.cloudinary.com/dx2drcria/image/upload/v1704684999/uploads/hxvqyhfmxyweco3gfa3e.png",
       content:
-        "The HRMS software exceeded my expectations. It has user-friendly interface, and robust analytics. A game-changer for our HR department",
+        "The Data Science program delivered by softmax is perfect for me, I would recommend to anyone who might be interested to take the course.",
     },
     {
       title: "Sandbox Inc.",
       client_name: "Daemon Jones",
       img: "https://res.cloudinary.com/dx2drcria/image/upload/v1704684998/uploads/zurqu7kjnqzfwepxfrta.jpg",
       content:
-        "Impressed with the software's efficiency. Time-saving features, accurate data management, and excellent support. A must-have for any organization",
+        "MERN নিয়ে আমার এক্সপেক্টেশন ১০০% ফুলফিল হয়েছে। সফটমেক্স-এ পেয়েছি ইন্সট্যান্ট সাপোর্ট। এ কারণেই আমি ভুল করে করে শেখার সাহস করতে পেরেছি। ধন্যবাদ Softmax কে।  সফটমেক্স এর কোর্স আমি সবসময় রেকমেন্ড করবো।",
     },
     {
       title: "Robox Corp.",
       client_name: "Alice Brown",
       img: "https://res.cloudinary.com/dx2drcria/image/upload/v1704684997/uploads/dpvvcredtu08mtmdkltw.jpg",
       content:
-        "HRMS software transformed our HR workflows. Seamless integration, and insightful reporting. Enhancing productivity and employee satisfaction.",
+        "ক্লাস আলহামদুলিল্লাহ যেভাবে চেয়েছি পেয়েছি। ক্লাসের থেকে অনেক কিছুই পেয়েছি। ইন্সট্রাক্টর অনেক ভালো ছিল। ওভারঅল অনেক এঞ্জয় করেছি, ওভারঅল স্যাটিসফাইড।",
     },
     {
       title: "Maximus Inc.",
@@ -79,9 +79,7 @@ const ReviewSection = () => {
         <h1 className="text-5xl text-center font-bold leadi mb-3">
           <span className="text-gradient">Reviews</span>
         </h1>
-        <p className="max-w-2xl text-center mx-auto">
-          What our Clients say about our services
-        </p>
+        <p className="max-w-2xl text-center mx-auto">Learner Reviews</p>
       </div>
       <Slider {...settings}>
         {dummyData?.map((data, index) => (
