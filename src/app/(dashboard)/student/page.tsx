@@ -1,9 +1,25 @@
 "use client";
-import { useCoursesQuery } from "@/redux/api/courseApi";
+import {
+  useCoursesQuery,
+  useEnrollCourseMutation,
+} from "@/redux/api/courseApi";
+import { useUserQuery } from "@/redux/api/userApi";
+import { getUserInfo } from "@/services/auth.service";
 import Image from "next/image";
 
 const StudentDashHome = () => {
+  const { user_id } = getUserInfo() as any;
+  const { data: user } = useUserQuery(user_id);
   const { data } = useCoursesQuery(undefined);
+  const [enrollCourse] = useEnrollCourseMutation();
+  const enrollCourseFunc = (id: string) => {
+    const enrollData = {
+      student: user?.id.toString(),
+      course: id.toString(),
+      status: "enrolled",
+    };
+    enrollCourse({ ...enrollData });
+  };
   return (
     <div>
       <h1 className="text-center text-3xl font-bold py-5 mb-10">
@@ -54,7 +70,10 @@ const StudentDashHome = () => {
               <div className="bg-slate-200 w-full h-full bottom-0">
                 <div className="flex justify-between items-center p-4 py-2">
                   <p className="h-full bottom-0">
-                    <button className="px-3 py-1 bg-green-500 rounded-xl text-white hover:bg-green-600 duration-150">
+                    <button
+                      onClick={() => enrollCourseFunc(course?.id)}
+                      className="px-3 py-1 bg-green-500 rounded-xl text-white hover:bg-green-600 duration-150"
+                    >
                       Enroll Now
                     </button>
                   </p>

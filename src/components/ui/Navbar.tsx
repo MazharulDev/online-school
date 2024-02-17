@@ -40,7 +40,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="/packages"
+                    href="/"
                   >
                     Course
                   </Link>
@@ -48,9 +48,9 @@ const Navbar = () => {
                 <li>
                   <Link
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="/your-review"
+                    href="/teacher-request"
                   >
-                    Academic Program
+                    Join Teacher
                   </Link>
                 </li>
                 {token_type ? (
@@ -153,9 +153,9 @@ const Navbar = () => {
             </Link>
             <Link
               className="text-gray-500 transition hover:text-gray-500/75"
-              href="/your-review"
+              href="/teacher-request"
             >
-              Academic Program
+              Join Teacher
             </Link>
             {token_type ? (
               <div className="text-center flex flex-col gap-7 text-md">

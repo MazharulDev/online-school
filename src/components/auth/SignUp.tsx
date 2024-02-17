@@ -10,8 +10,6 @@ import { useRouter } from "next/navigation";
 import Form from "../forms/Form";
 import Link from "next/link";
 import { useCreateUserMutation } from "@/redux/api/authApi";
-import FormSelectField from "../forms/FormSelectField";
-import { roleOptions } from "@/constants/global";
 
 type FormValues = {
   mobile_number: string;

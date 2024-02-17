@@ -22,7 +22,7 @@ export const sidebarItems = (role: string) => {
       icon: <ProfileOutlined />,
     },
     {
-      label: <Link href={`/${role}/booking`}>My Courses</Link>,
+      label: <Link href={`/${role}/mycourse`}>My Courses</Link>,
       icon: <CarryOutOutlined />,
       key: `/${role}/course`,
     },
