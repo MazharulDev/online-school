@@ -45,6 +45,7 @@ const SignUp = () => {
       }
       storeUserInfo({ accessToken: res?.token?.access });
     } catch (error) {
+      message.error("Someting went wrong");
       console.error(error);
     }
   };

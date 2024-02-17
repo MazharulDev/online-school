@@ -4,10 +4,12 @@ import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { useState } from "react";
 import { authkey } from "@/constants/storageKey";
 import { useRouter } from "next/navigation";
+import { useUserQuery } from "@/redux/api/userApi";
 
 const Navbar = () => {
   const router = useRouter();
-  const { token_type } = getUserInfo() as any;
+  const { token_type, user_id } = getUserInfo() as any;
+  const { data, isLoading } = useUserQuery(user_id);
   const [open, setOpen] = useState(false);
   const logOut = () => {
     removeUserInfo(authkey);
@@ -56,7 +58,7 @@ const Navbar = () => {
                     <div className="flex justify-center items-center gap-4">
                       <Link
                         className="text-gray-500 transition hover:text-gray-500/75"
-                        href="/profile"
+                        href={`/${data?.role}`}
                       >
                         Dashboard
                       </Link>
@@ -70,12 +72,20 @@ const Navbar = () => {
                   </li>
                 ) : (
                   <li>
-                    <Link
-                      className="text-gray-500 transition hover:text-gray-500/75"
-                      href="/login"
-                    >
-                      Login
-                    </Link>
+                    <div className="flex items-center gap-5">
+                      <Link
+                        className="text-gray-500 transition hover:text-gray-500/75"
+                        href="/signup"
+                      >
+                        Registration
+                      </Link>
+                      <Link
+                        className="text-gray-500 transition hover:text-gray-500/75"
+                        href="/login"
+                      >
+                        Login
+                      </Link>
+                    </div>
                   </li>
                 )}
               </ul>

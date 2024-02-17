@@ -1,33 +1,15 @@
-import { IMeta, IUsers } from "@/types";
 import { tagTypes } from "../tagTypes/tag-types";
 import { baseApi } from "./baseApi";
 
-const USER_URL = "/users";
+const USER_URL = "/user";
 export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    // get all admin
-    users: build.query({
-      query: (arg: Record<string, any>) => {
-        return {
-          url: `${USER_URL}`,
-          method: "GET",
-          params: arg,
-        };
-      },
-      transformResponse: (response: IUsers[], meta: IMeta) => {
-        return {
-          users: response,
-          meta,
-        };
-      },
-      providesTags: [tagTypes.user],
-    }),
     user: build.query({
-      query: (email: string | string[] | undefined) => ({
-        url: `/all-users/${email}`,
+      query: (id: string | string[] | undefined) => ({
+        url: `${USER_URL}/single/${id}/`,
         method: "GET",
       }),
-      providesTags: [tagTypes.user, tagTypes.admin],
+      providesTags: [tagTypes.user],
     }),
     updateUser: build.mutation({
       query: (data) => ({
@@ -71,7 +53,6 @@ export const userApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useUsersQuery,
   useUserQuery,
   useUpdateUserMutation,
   useUpdateSuperAdminMutation,

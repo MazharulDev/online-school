@@ -4,33 +4,21 @@ import {
   TableOutlined,
   WifiOutlined,
   CarryOutOutlined,
-  FormOutlined,
-  AccountBookOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 export const sidebarItems = (role: string) => {
   const defaultSidebarItems: MenuProps["items"] = [
     {
-      label: "Profile",
-      key: "profile",
+      label: "Student",
+      key: `${role}`,
       icon: <ProfileOutlined />,
-      children: [
-        {
-          label: <Link href={`/profile`}>Account Profile</Link>,
-          key: `/profile`,
-        },
-        {
-          label: <Link href={`/profile/${role}-edit`}>Update Profile</Link>,
-          key: `/${role}/profile`,
-        },
-      ],
     },
   ];
   const studentSidebarItem: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/booking`}>My Course</Link>,
+      label: <Link href={`/${role}/booking`}>My Courses</Link>,
       icon: <CarryOutOutlined />,
       key: `/${role}/course`,
     },

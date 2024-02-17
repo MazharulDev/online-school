@@ -75,11 +75,6 @@ const LoginPage = () => {
               Login
             </Button>
           </Form>
-          <div style={{ marginTop: "10px" }}>
-            <p>
-              You have not account? <Link href="/signup">Sign Up</Link>
-            </p>
-          </div>
         </div>
       </Col>
     </Row>
