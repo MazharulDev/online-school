@@ -8,15 +8,19 @@ import {
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 export const sidebarItems = (role: string) => {
-  const defaultSidebarItems: MenuProps["items"] = [
+  const defaultSidebarItems: MenuProps["items"] = [];
+  const studentSidebarItem: MenuProps["items"] = [
+    ...defaultSidebarItems,
     {
-      label: "Student",
+      label: <Link href={`/${role}`}>Student</Link>,
       key: `${role}`,
       icon: <ProfileOutlined />,
     },
-  ];
-  const studentSidebarItem: MenuProps["items"] = [
-    ...defaultSidebarItems,
+    {
+      label: <Link href={`/${role}/profile`}>Profile</Link>,
+      key: `${role}/profile`,
+      icon: <ProfileOutlined />,
+    },
     {
       label: <Link href={`/${role}/booking`}>My Courses</Link>,
       icon: <CarryOutOutlined />,
@@ -41,9 +45,9 @@ export const sidebarItems = (role: string) => {
   const adminSidebarItem: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/admin`}>Manage Teacher</Link>,
+      label: <Link href={`/${role}`}>Admin</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/admin`,
+      key: `/${role}`,
     },
     {
       label: <Link href={`/${role}/user`}>Manage Student</Link>,
