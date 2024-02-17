@@ -1,6 +1,6 @@
 "use client";
 import { Button, Col, Row, message } from "antd";
-import loginImage from "@/assets/Login.png";
+import loginImage from "@/assets/login.png";
 import Image from "next/image";
 
 import FormInput from "@/components/forms/FormInput";
@@ -9,7 +9,6 @@ import { useUserLoginMutation } from "@/redux/api/authApi";
 import { storeUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import Form from "../forms/Form";
-import Link from "next/link";
 
 type FormValues = {
   mobile_number: string;
